@@ -1,0 +1,67 @@
+.tmpl {
+    background: #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+}
+
+.left__nav > div {
+    padding:10px;
+    border:1px solid #ccc;
+    cursor:pointer;
+    margin: 10px 0;
+}
+.right__panel {
+    border:1px solid #aaa;
+    min-height: 400px;
+    padding: 10px;
+    color:#ccc;
+}
+.right__panel > div {
+    min-height:40px;
+    border: 1px solid #ccc;
+}
+.right__panel .item {
+    border: 1px solid #f00;
+    margin: 10px 0;
+    min-height:40px;
+}
+.right__panel .ui-sortable-handle {
+    margin-bottom: 20px;
+}
+.oper__zone,
+.oper__zone a {
+    color:#ccc;
+}
+.oper__zone .glyphicon {
+    cursor:pointer;
+}
+.oper__zone .glyphicon:hover {
+    color:#000;
+}
+.item__title {
+    border-bottom: 1px solid #ccc;
+    margin-left: -15px;
+    padding:10px;
+    padding-left: 15px;
+}
+.item__options {
+    padding-left: 20px;
+}
+.item__content {
+    border-left: 1px solid #ccc;
+    min-height:200px;
+}
+.item__content input{
+    border: none;
+}
+.item__content .item--edit {
+    border: 1px solid #ccc;
+}
+.left__nav .no-placeholder {
+    display: none;
+}
+
+.right__panel .no-placeholder {
+    display: block;
+}

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery UI Droppable - Simple photo manager</title>
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/sea.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <script src="/static/js/jquery-ui.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 J-left-nav left__nav connectedSortable">
+            <div data-type="1">单选题</div>
+            <div data-type="2">多选题</div>
+            <div data-type="3">文字录入</div>
+            <div data-type="4">图片(单选)</div>
+        </div>
+        <div class="col-md-8">
+            <form class="right__panel form form-inline J-right connectedSortable">
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--文字录入模板-->
+<script type="text/x-handlebars-tmpl" id="J-text-input-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型3</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="文字录入题目"/>
+            </div>
+            <div class="item__options">
+                <p class="J-option">
+                    <textarea rows="4" cols="80" class="form-control"></textarea>
+                </p>
+                <a href="javascript:void(0);" class="J-add-option">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+<!--多选题模板-->
+<script type="text/x-handlebars-tmpl" id="J-multi-choice-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型2</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="多选题题目"/>
+            </div>
+            <div class="item__options">
+                <p class="J-option">
+                    <label class="radio inline">
+                        <input name="multiChoice" type="radio">
+                        <input type="text" class="form-control" value="选项1"/>
+                        <a href="javascript:void(0);" class="J-delete-option">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </label>
+                </p>
+                <p class="J-option">
+                    <label class="radio inline">
+                        <input name="multiChoice" type="radio">
+                        <input type="text" class="form-control" value="选项2"/>
+                        <a href="javascript:void(0);" class="J-delete-option">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </label>
+                </p>
+                <a href="javascript:void(0);" class="J-add-option">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+<!--单选题模板-->
+<script type="text/x-handlebars-tmpl" id="J-single-choice-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型1</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="单选题题目"/>
+            </div>
+            <div class="item__options">
+                <p class="J-option">
+                    <label class="radio inline">
+                        <input name="singleChoice" type="radio">
+                        <input type="text" class="form-control" value="选项1"/>
+                        <a href="javascript:void(0);" class="J-delete-option">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </label>
+                </p>
+                <p class="J-option">
+                    <label class="radio inline">
+                        <input name="singleChoice" type="radio">
+                        <input type="text" class="form-control" value="选项2"/>
+                        <a href="javascript:void(0);" class="J-delete-option">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </label>
+                </p>
+            </div>
+        </div>
+    </div>
+</script>
+<div class="J-item-tmpl" style="display:none">
+    <div class="item">
+        <input type="text"/>
+    </div>
+</div>
+<div class="J-checkbox-tmpl" style="display:none">
+    <input type="checkbox"/>asdfasdf
+</div>
+<script>
+    seajs.config({
+      base: "/static/app/"
+    });
+    seajs.use('/static/app/index');
+</script>
+
+</body>
+</html>
