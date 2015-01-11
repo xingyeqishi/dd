@@ -25,6 +25,14 @@ define(function(require, exports, module){
             showItem(ui.item);
         }
     });
+    $('.J-right').on('click', '.J-y-add', function(e) {
+        var ndContainer = $(this).parents('.J-widget');
+        ndContainer.insertBefore(ndContainer.prev());
+    });
+    $('.J-right').on('click', '.J-y-reduce', function(e) {
+        var ndContainer = $(this).parents('.J-widget');
+        ndContainer.insertAfter(ndContainer.next());
+    });
     function showItem(item) {
         var type = item.data('type');
         var cloneNode = null;

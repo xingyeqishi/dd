@@ -17,13 +17,17 @@ define(function(require, exports, module){
             });
             _deleteOption();
         },
-        addOption: function() {
+        addOption: function(changeInput) {
             _bBox.on('click', '.J-add-option', function(e) {
-                var cloneNode = $(this).prev().clone();
+                e.stopPropagation();
+                var ndTarget = $(this);
+                var cloneNode = ndTarget.prev().clone();
                 var ndInput = cloneNode.find('input[type="text"]');
-                var index = _bBox.find('.J-option').size() + 1;
-                ndInput.val('选项' + index);
-                cloneNode.insertBefore($(this));
+                if (ndInput && changeInput) {
+                    var index = ndTarget.parent().find('.J-option').size() + 1;
+                    ndInput.val('选项' + index);
+                }
+                cloneNode.insertBefore(ndTarget);
             });
         },
         showEdit: function() {

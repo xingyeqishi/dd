@@ -3,6 +3,11 @@ define(function(require, exports, module){
     var MultiChoice = require('multi-choice');
     var TextInput = require('text-input');
     var SingleImg = require('single-img');
+    var SingleChoiceText = require('single-choice-text');
+    var MultiChoiceText = require('multi-choice-text');
+    var RangeSlider = require('range-slider');
+    var MultiImg = require('multi-img');
+
     module.exports.get = function(type) {
         var comp = {};
         type = parseInt(type, 10);
@@ -29,6 +34,30 @@ define(function(require, exports, module){
                 comp = {
                     class: SingleImg,
                     tmpl: '#J-single-img-tmpl' 
+                };
+                break;
+            case 5:
+                comp = {
+                    class: MultiImg,
+                    tmpl: '#J-multi-img-tmpl' 
+                };
+                break;
+            case 6:
+                comp = {
+                    class: SingleChoiceText,
+                    tmpl: '#J-single-choice-text-tmpl' 
+                };
+                break;
+            case 7:
+                comp = {
+                    class: MultiChoiceText,
+                    tmpl: '#J-multi-choice-text-tmpl' 
+                };
+                break;
+            case 8:
+                comp = {
+                    class: RangeSlider,
+                    tmpl: '#J-range-slider-tmpl' 
                 };
                 break;
         }

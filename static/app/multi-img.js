@@ -8,8 +8,9 @@ define(function(require, exports, module){
     function bindUI() {
         $Util.setBox(_bBox);
         $Util.deleteOper();
-        $Util.addOption();
+        $Util.addOption(false);
         $Util.showEdit();
+        _bBox.find('.J-slider').slider();
         _bBox.find('.J-copy').click(function(e) {
             var cloneNode = _bBox.clone();
             cloneNode.insertAfter(_bBox);

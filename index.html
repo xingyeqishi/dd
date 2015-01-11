@@ -16,10 +16,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 J-left-nav left__nav connectedSortable">
-            <div data-type="1">单选题</div>
-            <div data-type="2">多选题</div>
-            <div data-type="3">文字录入</div>
-            <div data-type="4">图片(单选)</div>
+            <div data-type="1" class="J-widget">单选题</div>
+            <div data-type="2" class="J-widget">多选题</div>
+            <div data-type="3" class="J-widget">文字录入</div>
+            <div data-type="4" class="J-widget">图片(单选)</div>
+            <div data-type="5" class="J-widget">图片(多选)</div>
+            <div data-type="6" class="J-widget">单选+文字</div>
+            <div data-type="7" class="J-widget">多选+文字</div>
+            <div data-type="8" class="J-widget">范围选择</div>
         </div>
         <div class="col-md-8">
             <form class="right__panel form form-inline J-right connectedSortable">
@@ -28,6 +32,340 @@
         </div>
     </div>
 </div>
+<!--单选+文字模板-->
+<script type="text/x-handlebars-tmpl" id="J-single-choice-text-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型6</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="单选+文字题目"/>
+            </div>
+            <div class="item__options">
+                <div>
+                    <p class="J-option">
+                        <label class="radio inline">
+                            <input name="multiChoice" type="radio">
+                            <input type="text" class="form-control" value="选项1"/>
+                            <a href="javascript:void(0);" class="J-delete-option">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </label>
+                    </p>
+                    <p class="J-option">
+                        <label class="radio inline">
+                            <input name="multiChoice" type="radio">
+                            <input type="text" class="form-control" value="选项2"/>
+                            <a href="javascript:void(0);" class="J-delete-option">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </label>
+                    </p>
+                    <a href="javascript:void(0);" class="J-add-option">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+                <div>
+                    <p class="J-option">
+                        <textarea rows="4" cols="80" class="form-control"></textarea>
+                    </p>
+                    <a href="javascript:void(0);" class="J-add-option">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="J-y-zone adjust__y">
+                <a href="javascript:void(0);" class="J-y-add">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <br/>
+                <a href="javascript:void(0);" class="J-y-reduce">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--多选+文字模板-->
+<script type="text/x-handlebars-tmpl" id="J-multi-choice-text-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型7</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="多选+文字题目"/>
+            </div>
+            <div class="item__options">
+                <div>
+                    <p class="J-option">
+                        <label class="checkbox inline">
+                            <input name="multiChoice" type="checkbox">
+                            <input type="text" class="form-control" value="选项1"/>
+                            <a href="javascript:void(0);" class="J-delete-option">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </label>
+                    </p>
+                    <p class="J-option">
+                        <label class="checkbox inline">
+                            <input name="multiChoice" type="checkbox">
+                            <input type="text" class="form-control" value="选项2"/>
+                            <a href="javascript:void(0);" class="J-delete-option">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </label>
+                    </p>
+                    <a href="javascript:void(0);" class="J-add-option">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+                <div>
+                    <p class="J-option">
+                        <textarea rows="4" cols="80" class="form-control"></textarea>
+                    </p>
+                    <a href="javascript:void(0);" class="J-add-option">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="J-y-zone adjust__y">
+                <a href="javascript:void(0);" class="J-y-add">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <br/>
+                <a href="javascript:void(0);" class="J-y-reduce">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--图片多选模板-->
+<script type="text/x-handlebars-tmpl" id="J-multi-img-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型5</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="图片多选题目"/>
+            </div>
+            <div class="item__options">
+                <div class="question__img__box">
+                    <div class="add__qimg__con J-option">
+                        <div class="uploader">
+                            <label>
+                                <input type="file" name="files[]" multiple="multiple" title="Click to add Files">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="J-y-zone adjust__y">
+                <a href="javascript:void(0);" class="J-y-add">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <br/>
+                <a href="javascript:void(0);" class="J-y-reduce">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--范围选择模板-->
+<script type="text/x-handlebars-tmpl" id="J-range-slider-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型6</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="范围选择题目"/>
+            </div>
+            <div class="item__options">
+                <div class="J-option">
+                    <textarea rows="4" cols="80" class="form-control"></textarea>
+                    <input type="text" class="form-control" placeholder="最大值"/>
+                    <input type="text" class="form-control" placeholder="最小值"/>
+                    <input type="text" class="form-control" placeholder="间隔值"/>
+                    <div class="J-slider"></div>
+                </div>
+                <a href="javascript:void(0);" class="J-add-option">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+            <div class="J-y-zone adjust__y">
+                <a href="javascript:void(0);" class="J-y-add">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <br/>
+                <a href="javascript:void(0);" class="J-y-reduce">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--图片单选模板-->
+<script type="text/x-handlebars-tmpl" id="J-single-img-tmpl">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="oper__zone text-center">
+            <h4>类型3</h4>
+            <div>
+                <p>
+                    <a>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-copy">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0);" class="J-delete">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+                <p>
+                <a>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-10 item__content">
+            <div class="item__title">
+                <input type="text" class="form-control" value="图片单选题目"/>
+            </div>
+            <div class="item__options">
+                <div class="question__img__box">
+                    <div class="add__qimg__con J-option">
+                        <div class="uploader">
+                            <label>
+                                <input type="file" name="files[]" multiple="multiple" title="Click to add Files">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="J-y-zone adjust__y">
+                <a href="javascript:void(0);" class="J-y-add">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <br/>
+                <a href="javascript:void(0);" class="J-y-reduce">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
 <!--文字录入模板-->
 <script type="text/x-handlebars-tmpl" id="J-text-input-tmpl">
     <div class="row">
@@ -68,6 +406,15 @@
                 </p>
                 <a href="javascript:void(0);" class="J-add-option">
                     <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+            <div class="J-y-zone adjust__y">
+                <a href="javascript:void(0);" class="J-y-add">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <br/>
+                <a href="javascript:void(0);" class="J-y-reduce">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
             </div>
         </div>
@@ -129,6 +476,15 @@
                 <a href="javascript:void(0);" class="J-add-option">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
+                <div class="J-y-zone adjust__y">
+                    <a href="javascript:void(0);" class="J-y-add">
+                        <span class="glyphicon glyphicon-chevron-up"></span>
+                    </a>
+                    <br/>
+                    <a href="javascript:void(0);" class="J-y-reduce">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -186,6 +542,15 @@
                         </a>
                     </label>
                 </p>
+            </div>
+            <div class="J-y-zone adjust__y">
+                <a href="javascript:void(0);" class="J-y-add">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <br/>
+                <a href="javascript:void(0);" class="J-y-reduce">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
             </div>
         </div>
     </div>
