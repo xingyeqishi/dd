@@ -42,6 +42,19 @@ define(function(require, exports, module){
         comp.class.init(item);
     }
 
+    $.get('/sfb/view.ajax', {id:localStorage.getItem('sid')}, function(res) {
+        var data = res;
+        data.forEach(function(item) {
+            console.log(item);
+            var comp = CompMap.get(item.type);
+            var div = $('<div data-type="' + item.type + '" class="J-widget ui-sortable-handle" style="display:block;"></div>');
+            var html = Handlebars.compile($(comp.tmpl).html())(item);
+            div = div.append(html);
+            $('.J-right').append(div);
+            comp.class.init(div);
+        });
+    });
+
     $('.J-save-btn').click(function(e) {
         var ws = $('.J-form .J-widget-item');
         var arr = [];

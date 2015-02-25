@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery UI Droppable - Simple photo manager</title>
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/sea.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <script src="/static/js/jquery-ui.js"></script>
+    <script src="/static/js/handlebars-v3.0.0.js"></script>
+    <script src="/static/js/underscore-min.js"></script>
+    <script src="/static/js/helpers.js"></script>
+</head>
+<body>
+<div class="container">
+    <form class="J-form">
+        <ol class="J-main">
+            <input type="hidden" class="J-id" name="issueId" value=""/>
+        </ol>
+    </form>
+    <div class="text-center">
+        <input type="button" class="btn btn-primary J-submit" value="提交"/>
+    </div>
+</div>
+<!--单选题模板-->
+<script type="text/x-handlebars-tmpl" id="J-single-choice-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            {{#each options}}
+                <label>
+                    <input type="radio" class="J-option" value="{{@index}}" name="option"/>
+                    {{value}}
+                </label>
+            {{/each}}
+        </div>
+    </li>
+</script>
+<script type="text/x-handlebars-tmpl" id="J-multi-choice-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            {{#each options}}
+                <label>
+                    <input type="checkbox" class="J-option" value="{{@index}}" name="option"/>
+                    {{value}}
+                </label>
+            {{/each}}
+        </div>
+    </li>
+</script>
+<script type="text/x-handlebars-tmpl" id="J-text-input-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            {{#each options}}
+                <textarea class="J-option form-control" name="option">{{value}}</textarea>
+            {{/each}}
+        </div>
+    </li>
+</script>
+<!--图片单选模板-->
+<script type="text/x-handlebars-tmpl" id="J-single-img-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            {{#each options}}
+                <label>
+                    <div class="text-center">
+                        <img class="img__option" src="{{value}}"/>
+                        <br/>
+                        <input type="radio" class="J-option" name="option" value="{{value}}"/>
+                    </div>
+                </label>
+            {{/each}}
+        </div>
+    </li>
+</script>
+<!--图片多选模板-->
+<script type="text/x-handlebars-tmpl" id="J-multi-img-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            {{#each options}}
+                <label>
+                    <div class="text-center">
+                        <img class="img__option" src="{{value}}"/>
+                        <br/>
+                        <input type="checkbox" class="J-option" name="option" value="{{value}}"/>
+                    </div>
+                </label>
+            {{/each}}
+        </div>
+    </li>
+</script>
+<!--单选+文字模板-->
+<script type="text/x-handlebars-tmpl" id="J-single-choice-text-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            {{#each options}}
+                {{#is type "input"}}
+                    <label>
+                            <input type="radio" class="J-option" value="{{@index}}" name="option"/>
+                            {{value}}
+                    </label>
+                {{else}}
+                    <textarea class="J-option form-control" name="option">{{value}}</textarea>
+                {{/is}}
+            {{/each}}
+        </div>
+    </li>
+</script>
+<!--多选+文字模板-->
+<script type="text/x-handlebars-tmpl" id="J-multi-choice-text-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            {{#each options}}
+                {{#is type "input"}}
+                    <label>
+                            <input type="checkbox" class="J-option" value="{{@index}}" name="option"/>
+                            {{value}}
+                    </label>
+                {{else}}
+                    <textarea class="J-option form-control" name="option">{{value}}</textarea>
+                {{/is}}
+            {{/each}}
+        </div>
+    </li>
+</script>
+<!-- 化验单模板 -->
+<script type="text/x-handlebars-tmpl" id="J-huayan-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <input type="hidden" class="J-option" name="hyId" value="{{hyId}}"/>
+        <div>
+            {{#each options}}
+                {{#is type "textarea"}}
+                    <textarea class="J-option form-control" name="option">{{value}}</textarea>
+                {{else}}
+                    <div>
+                        <label><input type="checkbox" class="J-option" name="option" value="{{id}}"/>{{name}}</label>
+                    </div>
+                {{/is}}
+            {{/each}}
+        </div>
+    </li>
+</script>
+<!-- 检查模板 -->
+<script type="text/x-handlebars-tmpl" id="J-jiancha-tmpl">
+    <li class="J-issue">
+        <h5>{{title}}</h5>
+        <div>
+            <select class="J-choose-jc J-option form-control" name="option">
+                {{#each jcData}}
+                    <option value="{{id}}">{{name}}</option> 
+                {{/each}}
+            </select>
+            {{#each options}}
+                {{#is type "textarea"}}
+                    <textarea class="J-option form-control" name="option">{{value}}</textarea>
+                {{/is}}
+            {{/each}}
+        </div>
+    </li>
+</script>
+
+<script>
+    seajs.config({
+      base: "/static/app/"
+    });
+    seajs.use('/static/app/view-issue'); 
+</script>
+</body>
+</html>

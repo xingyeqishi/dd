@@ -7,6 +7,8 @@ define(function(require, exports, module){
     var MultiChoiceText = require('multi-choice-text');
     var RangeSlider = require('range-slider');
     var MultiImg = require('multi-img');
+    var HuaYan = require('huayan');
+    var JianCha = require('jiancha');
 
     module.exports.get = function(type) {
         var comp = {};
@@ -58,6 +60,18 @@ define(function(require, exports, module){
                 comp = {
                     class: RangeSlider,
                     tmpl: '#J-range-slider-tmpl' 
+                };
+                break;
+            case 9:
+                comp = {
+                    class: HuaYan,
+                    tmpl: '#J-huayan-tmpl'
+                };
+                break;
+            case 10:
+                comp = {
+                    class: JianCha,
+                    tmpl: '#J-jiancha-tmpl'
                 };
                 break;
         }

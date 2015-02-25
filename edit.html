@@ -16,6 +16,7 @@
     <script src="/static/js/jquery.ui.widget.js"></script>
     <script src="/static/js/jquery.fileupload.js"></script>
     <script src="/static/js/handlebars-v3.0.0.js"></script>
+    <script src="/static/js/helpers.js"></script>
 </head>
 <body>
 <div class="container">
@@ -35,6 +36,7 @@
         </div>
         <div class="col-md-8">
             <form class="right__panel form form-inline J-right J-form connectedSortable">
+
             </form>
             <input type="button" class="btn btn-primary J-save-btn" value="提交"/>
         </div>
@@ -72,36 +74,35 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control J-title" value="单选+文字题目"/>
+                <input type="text" class="form-control J-title" value="{{title}}"/>
             </div>
             <div class="item__options">
                 <div>
-                    <p class="J-option">
-                        <label class="radio inline">
-                            <input name="multiChoice" type="radio">
-                            <input type="text" class="form-control J-option-name" value="选项1"/>
-                            <a href="javascript:void(0);" class="J-delete-option">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                        </label>
-                    </p>
-                    <p class="J-option">
-                        <label class="radio inline">
-                            <input name="multiChoice" type="radio">
-                            <input type="text" class="form-control J-option-name" value="选项2"/>
-                            <a href="javascript:void(0);" class="J-delete-option">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                        </label>
-                    </p>
+                    {{#each options}}
+                        {{#is type 'input'}}
+                            <p class="J-option">
+                                <label class="radio inline">
+                                    <input name="multiChoice" type="radio">
+                                    <input type="text" class="form-control J-option-name" value="{{value}}"/>
+                                    <a href="javascript:void(0);" class="J-delete-option">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </label>
+                            </p>
+                        {{/is}}
+                    {{/each}}
                     <a href="javascript:void(0);" class="J-add-option">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </div>
                 <div>
-                    <p class="J-option">
-                        <textarea rows="4" cols="80" class="form-control J-option-name"></textarea>
-                    </p>
+                    {{#each options}}
+                        {{#is type 'textarea'}}
+                            <p class="J-option">
+                                <textarea rows="4" cols="80" class="form-control J-option-name"></textarea>
+                            </p>
+                        {{/is}}
+                    {{/each}}
                     <a href="javascript:void(0);" class="J-add-option">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
@@ -152,36 +153,35 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control J-title" value="多选+文字题目"/>
+                <input type="text" class="form-control J-title" value="{{title}}"/>
             </div>
             <div class="item__options">
                 <div>
-                    <p class="J-option">
-                        <label class="checkbox inline">
-                            <input name="multiChoice" type="checkbox">
-                            <input type="text" class="form-control J-option-name" value="选项1"/>
-                            <a href="javascript:void(0);" class="J-delete-option">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                        </label>
-                    </p>
-                    <p class="J-option">
-                        <label class="checkbox inline">
-                            <input name="multiChoice" type="checkbox">
-                            <input type="text" class="form-control J-option-name" value="选项2"/>
-                            <a href="javascript:void(0);" class="J-delete-option">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                        </label>
-                    </p>
+                    {{#each options}}
+                        {{#is type 'input'}}
+                            <p class="J-option">
+                                <label class="checkbox inline">
+                                    <input name="multiChoice" type="checkbox">
+                                    <input type="text" class="form-control J-option-name" value="{{value}}"/>
+                                    <a href="javascript:void(0);" class="J-delete-option">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </label>
+                            </p>
+                        {{/is}}
+                    {{/each}}
                     <a href="javascript:void(0);" class="J-add-option">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </div>
                 <div>
-                    <p class="J-option">
-                        <textarea rows="4" cols="80" class="form-control J-option-name"></textarea>
-                    </p>
+                    {{#each options}}
+                        {{#is type 'textarea'}}
+                            <p class="J-option">
+                                <textarea rows="4" cols="80" class="form-control J-option-name">{{value}}</textarea>
+                            </p>
+                        {{/is}}
+                    {{/each}}
                     <a href="javascript:void(0);" class="J-add-option">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
@@ -232,9 +232,21 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control J-title" value="图片多选题目"/>
+                <input type="text" class="form-control J-title" value="{{title}}"/>
             </div>
             <div class="item__options">
+                {{#each options}}
+                    <div class="question__img__box J-img-box">
+                        <div class="add__qimg__con J-option">
+                            <div class="uploader">
+                                <label>
+                                    <input type="file" class="fileupload" name="files[]" multiple="multiple" title="Click to add Files">
+                                            <img src="{{value}}"/><input type="hidden" class="J-option-name" value="{{value}}"/>'
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
                 <div class="question__img__box J-img-box">
                     <div class="add__qimg__con J-option">
                         <div class="uploader">
@@ -290,14 +302,14 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control" value="范围选择题目"/>
+                <input type="text" class="form-control" value="{{title}}"/>
             </div>
             <div class="item__options">
                 <div class="J-option">
-                    <textarea rows="4" cols="80" class="form-control J-title"></textarea>
-                    <input type="text" class="form-control J-option-name" placeholder="最大值"/>
-                    <input type="text" class="form-control J-option-name" placeholder="最小值"/>
-                    <input type="text" class="form-control J-option-name" placeholder="间隔值"/>
+                    <textarea rows="4" cols="60" class="form-control J-title"></textarea>
+                    {{#each options}}
+                        <input type="text" class="form-control J-option-name" placeholder="{{value}}"/>
+                    {{/each}}
                     <div class="J-slider"></div>
                 </div>
                 <a href="javascript:void(0);" class="J-add-option">
@@ -349,9 +361,20 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control J-title" value="图片单选题目"/>
+                <input type="text" class="form-control J-title" value="{{title}}"/>
             </div>
             <div class="item__options">
+                {{#each options}}
+                    <div class="question__img__box J-img-box">
+                        <div class="add__qimg__con J-option">
+                            <div class="uploader">
+                                <label>
+                                        <img src="{{value}}"/><input type="hidden" class="J-option-name" value="{{value}}"/>'
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
                 <div class="question__img__box J-img-box">
                     <div class="add__qimg__con J-option">
                         <div class="uploader">
@@ -406,12 +429,14 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control J-title" value="文字录入题目"/>
+                <input type="text" class="form-control J-title" value="{{title}}"/>
             </div>
             <div class="item__options">
-                <p class="J-option">
-                    <textarea rows="4" cols="80" class="form-control J-option-name"></textarea>
-                </p>
+                {{#each options}}
+                    <p class="J-option">
+                        <textarea rows="4" cols="80" class="form-control J-option-name">{{value}}</textarea>
+                    </p>
+                {{/each}}
                 <a href="javascript:void(0);" class="J-add-option">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
@@ -460,27 +485,20 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control J-title" value="多选题题目"/>
+                <input type="text" class="form-control J-title" name="title" value="{{title}}"/>
             </div>
             <div class="item__options">
-                <p class="J-option">
-                    <label class="radio inline">
-                        <input name="multiChoice" type="radio">
-                        <input type="text" class="form-control J-option-name" value="选项1"/>
-                        <a href="javascript:void(0);" class="J-delete-option">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </label>
-                </p>
-                <p class="J-option">
-                    <label class="radio inline">
-                        <input name="multiChoice" type="radio">
-                        <input type="text" class="form-control J-option-name" value="选项2"/>
-                        <a href="javascript:void(0);" class="J-delete-option">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </label>
-                </p>
+                {{#each options}}
+                    <p class="J-option">
+                        <label class="radio inline">
+                            <input name="multiChoice" type="radio">
+                            <input type="text" class="form-control J-option-name" value="{{value}}"/>
+                            <a href="javascript:void(0);" class="J-delete-option">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </label>
+                    </p>
+                {{/each}}
                 <a href="javascript:void(0);" class="J-add-option">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
@@ -529,28 +547,21 @@
         </div>
         <div class="col-md-10 item__content">
             <div class="item__title">
-                <input type="text" class="form-control J-title" name="title" value="单选题题目"/>
+                <input type="text" class="form-control J-title" name="title" value="{{title}}"/>
                 <input type="hidden" name="type" value="1"/>
             </div>
             <div class="item__options">
-                <p class="J-option">
-                    <label class="radio inline">
-                        <input name="singleChoice" type="radio">
-                        <input type="text" class="form-control J-option-name" name="optionName" value="选项1"/>
-                        <a href="javascript:void(0);" class="J-delete-option">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </label>
-                </p>
-                <p class="J-option">
-                    <label class="radio inline">
-                        <input name="singleChoice" type="radio">
-                        <input type="text" class="form-control J-option-name" name="optionName" value="选项2"/>
-                        <a href="javascript:void(0);" class="J-delete-option">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </label>
-                </p>
+                {{#each options}}
+                    <p class="J-option">
+                        <label class="radio inline">
+                            <input name="singleChoice" type="radio">
+                            <input type="text" class="form-control J-option-name" name="optionName" value="{{value}}"/>
+                            <a href="javascript:void(0);" class="J-delete-option">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </label>
+                    </p>
+                {{/each}}
                 <a href="javascript:void(0);" class="J-add-option">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
@@ -706,7 +717,7 @@
     seajs.config({
       base: "/static/app/"
     });
-    seajs.use('/static/app/index');
+    seajs.use('/static/app/edit');
 </script>
 
 </body>

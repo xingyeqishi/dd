@@ -6,7 +6,10 @@ define(function(require, exports, module){
         bindUI();
     }
     function bindUI() {
-        $Util.deleteOper(_bBox);
+        $Util.setBox(_bBox);
+        $Util.deleteOper();
+        $Util.addOption();
+        $Util.showEdit();
         _bBox.find('.J-copy').click(function(e) {
             var cloneNode = _bBox.clone();
             cloneNode.insertAfter(_bBox);

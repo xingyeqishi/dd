@@ -1,0 +1,54 @@
+doctype html
+html
+    head
+        link(href='/static/css/jquery-ui.css' rel="stylesheet")
+        link(href="/static/css/bootstrap.min.css" rel="stylesheet")
+        link(href="/static/css/index.css" rel="stylesheet")
+        script(src='/static/js/sea.js')
+        script(src='/static/js/respond.min.js')
+        script(src='/static/js/jquery-1.10.2.js')
+        script(src='/static/js/jquery-ui.js')
+        script(src="/static/js/jquery.serializejson.min.js")
+        script(src="/static/js/handlebars-v3.0.0.js")
+    body
+        div.container 
+            form.J-main
+                input(type="hidden" class="J-id" name="issueId" value='#{id}')
+            div.text-center
+                input(type="button" class="btn btn-primary J-submit" value="提交")
+
+        //单选题模板
+        script(type="text-x-handlebars-tmpl" id="J-single-choice-tmpl")
+            div.J-issue
+                h3
+                    {{title}}
+
+            {{#each options}}
+            label
+                input(type="radio" class="J-option" value="{{@index}}" name="option")
+                {{this}}
+            {{/each}}
+        //多选题模板
+        script(type="text/x-handlebars-tmpl" id="J-multi-choice-tmpl")
+            div.J-issue
+                h3
+                    {{title}}
+            {{#each options}}
+            label
+                input(type="checkbox" class="J-option" value="{{@index}}" name="option")
+                {{this}}
+            {{/each}}
+        //文字录入模板
+        script(type="text/x-handlebars-tmpl" id="J-text-input-tmpl")
+            div.J-issue
+                h3
+                    {{title}}
+            {{#each options}}
+            textarea(class="J-option" name="option")
+            {{this}}
+            {{/each}}
+        script
+            |seajs.config({
+            |    base: "/static/app/"
+            |})
+            |seajs.use('/static/app/view'); 

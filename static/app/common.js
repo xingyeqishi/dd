@@ -37,6 +37,30 @@ define(function(require, exports, module){
             _bBox.on('blur', 'input, textarea', function(e) {
                 $(this).removeClass('item--edit');
             });
+        },
+        bindUpload: function(nd) {
+            var _this = this;
+            nd.fileupload({
+                url: '/uploadPic',
+                dataType: 'json',
+                done: function (e, data) {
+                    var img = '<img src="/' + data.result.imgUrl + '"/><input type="hidden" class="J-option-name" value="/' + data.result.imgUrl + '"/>';
+                    var ndContainer = $(this).parents('.J-img-box');
+                    var cloneNode = ndContainer.clone();
+                    _this.bindUpload(cloneNode.find('.fileupload'));
+                    ndContainer.parent().append(cloneNode);
+                    ndContainer.addClass('active');
+                    $(this).parent().html(img);
+                },
+                progressall: function (e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progress .progress-bar').css(
+                        'width',
+                        progress + '%'
+                    );
+                }
+            }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
         }
     };
 });

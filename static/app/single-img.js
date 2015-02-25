@@ -4,6 +4,7 @@ define(function(require, exports, module){
     function init(bBox) {
         _bBox = $(bBox);
         bindUI();
+        $Util.bindUpload($('.fileupload'));
     }
     function bindUI() {
         $Util.setBox(_bBox);

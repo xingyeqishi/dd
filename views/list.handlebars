@@ -1,0 +1,17 @@
+<script src='/static/js/jquery-1.10.2.js'></script>
+<style>
+    p {
+        margin-bottom: 20px;
+    }
+</style>
+{{#data}}
+    <p>
+        <a href="/sfb/view?id={{this}}" class="J-item">{{this}}</a>
+    </p>
+{{/data}}
+<script>
+    $('.J-item').click(function(e) {
+        var item = $(e.target);
+        localStorage.setItem('sid', item.html());
+    });
+</script>
